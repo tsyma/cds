@@ -1,0 +1,11 @@
+POST http://localhost:8888/uploadImage
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Token: !!!SPECIFY-CDS-TOKEN!!!
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="file.txt"
+
+< ./linux.png
+--WebAppBoundary--
+
+###
