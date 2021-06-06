@@ -2,12 +2,12 @@ package net.lafox.cds.data;
 
 import java.io.File;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.Builder;
+import lombok.Value;
 
-@Data
-@RequiredArgsConstructor(staticName = "of")
+@Value
+@Builder(toBuilder = true)
 public class FileInfo {
-    private final File file;
-    private final String id;
+    File file;
+    String id;
 }
