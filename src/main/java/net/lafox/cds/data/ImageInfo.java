@@ -1,19 +1,19 @@
 package net.lafox.cds.data;
 
-import net.lafox.cds.service.exceptions.UnsupportedAlgorithmException;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Value;
+import net.lafox.cds.service.exceptions.UnsupportedAlgorithmException;
 
-@Data
+@Value
 @Builder(toBuilder = true)
 public class ImageInfo {
 
-    private String id;
-    private String algorithm;
-    private Integer width;
-    private Integer height;
-    private Integer quality;
-    private String type;
+    String id;
+    String algorithm;
+    Integer width;
+    Integer height;
+    Integer quality;
+    String type;
 
     @Override
     public String toString() {
@@ -29,6 +29,5 @@ public class ImageInfo {
                 throw new UnsupportedAlgorithmException(algorithm);
         }
     }
-
 
 }

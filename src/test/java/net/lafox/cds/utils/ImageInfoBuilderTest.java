@@ -1,4 +1,4 @@
-package com.fishtofry.imageService.utils;
+package net.lafox.cds.utils;
 
 import static net.lafox.cds.utils.ImageInfoBuilder.parseImageInfoString;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,7 +24,7 @@ class ImageInfoBuilderTest {
 
     @Test
     void that_h_is_parsed() {
-        assertThat(parseImageInfoString("h113q14.jpg")).isEqualTo(
+            assertThat(parseImageInfoString("h113q14.jpg")).isEqualTo(
                 ImageInfo.builder()
                         .algorithm("h")
                         .height(113)

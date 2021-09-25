@@ -31,7 +31,6 @@ public class IpAddressMatcher {
      * @param ipAddress the address or range of addresses from which the request must come.
      */
     public IpAddressMatcher(String ipAddress) {
-
         if (ipAddress.indexOf('/') > 0) {
             String[] addressAndMask = StringUtils.split(ipAddress, "/");
             assert addressAndMask != null;
