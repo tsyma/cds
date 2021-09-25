@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.lafox.cds.service.FileService;
 import net.lafox.cds.service.SecurityService;
+import net.lafox.cds.service.exceptions.BannedIpException;
 import net.lafox.cds.service.exceptions.WrongTokenException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,14 +24,14 @@ public class UploadController {
 
 
     @PostMapping(path = "/uploadImage", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Object handleFormUpload(@RequestParam MultipartFile file, HttpServletRequest request) {
+    public ResponseEntity<?> handleFormUpload(@RequestParam MultipartFile file, HttpServletRequest request) {
         securityService.validateToken(request);
         securityService.validateIpAddress(request);
-        return fileService.save(file);
+        return ResponseEntity.ok(fileService.save(file));
     }
 
-    @ExceptionHandler(value = {WrongTokenException.class})
-    protected ResponseEntity<Object> handleEntityNotFound(Exception ex) {
-        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    @ExceptionHandler(value = {WrongTokenException.class, BannedIpException.class})
+    protected ResponseEntity<?> handleEntityNotFound(Exception ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ex.getMessage());
     }
 }

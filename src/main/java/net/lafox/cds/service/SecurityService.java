@@ -2,13 +2,13 @@ package net.lafox.cds.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import lombok.RequiredArgsConstructor;
 import net.lafox.cds.Config;
 import net.lafox.cds.data.ImageInfo;
-import net.lafox.cds.utils.IpAddressMatcher;
 import net.lafox.cds.service.exceptions.BannedIpException;
 import net.lafox.cds.service.exceptions.UnsupportedImageFormatException;
 import net.lafox.cds.service.exceptions.WrongTokenException;
-import lombok.RequiredArgsConstructor;
+import net.lafox.cds.utils.IpAddressMatcher;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,7 +20,7 @@ public class SecurityService {
     public void validateToken(HttpServletRequest request) {
         String token = request.getHeader("Token");
         if (!config.getServerToken().equals(token)) {
-            throw new WrongTokenException("Wrong token!");
+            throw new WrongTokenException("Wrong token: " + token);
         }
     }
 
